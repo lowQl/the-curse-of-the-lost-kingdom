@@ -1,0 +1,19 @@
+{
+  "name": "the-curse-of-the-lost-kingdom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "BeenYan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-vue": "^8.5.0"
+  }
+}
