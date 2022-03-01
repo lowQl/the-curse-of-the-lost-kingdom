@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隊伍管理</title>
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/index/css/login.css">
+  <link rel="stylesheet" href="/manage/css/team.css">
+</head>
+
+<body>
+  <div id="app" class="h-100">
+    <nav class="navbar navbar-light fixed-top border-bottom shadow-sm" style="background-color: #e3f2fd;">
+      <div class="container">
+        <a class="navbar-brand" href="/" style="font-size: .8rem;">LOGO 遺落國度·金資塔的詛咒</a>
+        <a href="/logout" class="btn btn-outline-success my-1 btn-sm">登出</a>
+      </div>
+    </nav>
+
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center">
+        <div class="px-3 col-lg-6 col-md-8 login-box">
+          <div class="col-lg-12 login-title">{{ title }}</div>
+
+          <div class="col-lg-12 login-form">
+            <div class="col-lg-12 login-form" v-if="step === 'list'">
+              <table class="table table-light">
+                <thead>
+                  <tr>
+                    <th scope="col">資訊</th>
+                    <th scope="col">編號</th>
+                    <th scope="col">名稱</th>
+                    <th scope="col">刪除</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="team,index of teamList">
+                    <th class="t-center">
+                      <button type="button" class="btn btn-primary">
+                        <i class="fas fa-info-circle"></i>
+                      </button>
+                    </th>
+                    <th scope="row">{{ team.id }}</th>
+                    <td>{{ team.name }}</td>
+                    <td class="t-center">
+                      <button type="button" class="btn btn-danger" @click="deleteHandler(index)">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-12 login-form" v-else-if="step === 'insert'">
+              <div class="form-group">
+                <label class="form-control-label">隊伍編號</label>
+                <input type="text" class="form-control" maxlength="50" @input='evt=>id=evt.target.value'
+                  @keydown.enter.prevent='insertHandler' key="id">
+              </div>
+
+              <div class="col-lg-12 loginbttm">
+                <button type="button" class="btn btn-outline-primary float-end" @click="insertHandler">新增</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center text-lg-start bg-light text-muted fixed-bottom footer">
+      <div class="text-center foot-box d-flex justify-content-around align-items-center"
+        style="background-color: rgba(0, 0, 0, 0.05);">
+        <div class="pivot-bar-item-tab" :class="{ active: step === 'list' }" @click="step='list'">
+          <div class="icon-state-filled">
+            <i class="fas fa-list-ul"></i>
+          </div>
+          <div class="pivot-bar-item-title">隊伍列表</div>
+        </div>
+
+        <div class="pivot-bar-item-tab" :class="{ active: step === 'insert' }" @click="step='insert'">
+          <div class="icon-state-filled">
+            <i class="fas fa-flag"></i>
+          </div>
+          <div class="pivot-bar-item-title">新增隊伍</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/axios.min.js"></script>
+  <script src="/js/vue.js"></script>
+  <script src="/manage/js/team.js"></script>
+</body>
+
+</html>

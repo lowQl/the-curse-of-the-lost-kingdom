@@ -1,12 +1,19 @@
-body {
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 0;
     background: #222D32;
     font-family: 'Roboto', sans-serif;
 }
 
 .login-box {
-    padding: 10px 48px 40px 48px;
-    margin-top: 75px;
+    padding: 85px 48px 40px 48px;
+    max-height: 100%;
     height: auto;
+    overflow: hidden;
     background: #1A2226;
     text-align: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -32,6 +39,7 @@ body {
 }
 
 .login-form {
+    overflow: hidden;
     margin-top: 25px;
     text-align: left;
 }
@@ -100,11 +108,11 @@ label {
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
 
-.btn-outline-primary:hover {
-    background-color: #0DB8DE;
-    right: 0px;
+    &hover hover {
+        background-color: #0DB8DE;
+        right: 0px;
+    }
 }
 
 .login-btm {

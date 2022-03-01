@@ -1,0 +1,21 @@
+body,
+.login-title,
+.login-box,
+input[type=text] {
+  color: #333;
+  background: #ffffff;
+}
+
+input[type=text] {
+  color: #555;
+}
+
+.form-control-label {
+  font-size: .8rem;
+}
+
+.form-control:focus {
+  color: #000;
+  background: none;
+}
+/*# sourceMappingURL=user.css.map */

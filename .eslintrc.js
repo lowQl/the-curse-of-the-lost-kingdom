@@ -17,9 +17,13 @@ module.exports = {
     ],
     'rules': {
         'linebreak-style': ['error', 'windows'],
-        'indent': ['error', 4],
-        'space-before-function-paren': ['error', 'always'],
-        'arrow-spacing': ['error', {'before': true, 'after': true}],
-        'space-infix-ops': ['error', {'int32Hint': true}],
+        'indent': ['error', 2],
+        'space-before-function-paren': ['error', 'never'],
+        'arrow-spacing': ['error', { 'before': true, 'after': true }],
+        'space-infix-ops': ['error', { 'int32Hint': true }],
+        'prefer-template': ['error'],
+        'template-curly-spacing': ['error', 'never'],
+        'space-in-parens': ['error', 'never'],
+        'new-cap': 'off',
     },
 };

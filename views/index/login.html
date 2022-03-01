@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>登入</title>
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/index/css/login.css">
+</head>
+
+<body>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center">
+            <div id="app" class="col-lg-6 col-md-8 login-box">
+                <div class="col-lg-12 login-key d-flex justify-content-center align-items-center">
+                    <h1>LOGO</h1>
+                </div>
+                <div class="col-lg-12 login-title">{{ title }}</div>
+
+                <div class="col-lg-12 login-form">
+                    <div class="col-lg-12 login-form" v-if="!step">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-control-label">隊伍號碼</label>
+                                <input type="text" class="form-control" maxlength="50"
+                                    @input='evt=>inputText=evt.target.value' @keydown.enter.prevent='loginHandler'
+                                    key="inputText">
+                            </div>
+
+                            <div class="col-lg-12 loginbttm">
+                                <button type="button" class="btn btn-outline-primary float-end"
+                                    @click="loginHandler">登入</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-12 login-form" v-else>
+                        <form>
+                            <div class="form-group">
+                                <label class="form-control-label">隊伍名稱</label>
+                                <input type="text" class="form-control" maxlength="255"
+                                    @input='evt=>name=evt.target.value' @keydown.enter.prevent='playHandler' key="name">
+                            </div>
+
+                            <div class="col-lg-12 loginbttm">
+                                <button type="button" class="btn btn-outline-primary float-end"
+                                    @click="playHandler">開始遊戲</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/index/js/login.js"></script>
+</body>
+
+</html>

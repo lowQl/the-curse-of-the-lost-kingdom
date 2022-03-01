@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者 介面</title>
+  <link rel="stylesheet" href="/css/font.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/index/css/manage.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-light fixed-top border-bottom shadow-sm" style="background-color: #e3f2fd;">
+    <div class="container">
+      <a class="navbar-brand" href="/" style="font-size: .8rem;">LOGO 遺落國度·金資塔的詛咒</a>
+      <a href="/logout" class="btn btn-outline-success my-1 btn-sm">登出</a>
+    </div>
+  </nav>
+
+  <div class="container px-1">
+    <div class="d-flex flex-wrap mb-4" style="justify-content:space-around">
+      <a href="manage/user" class="block mb-3 link-box" style="background-color: var(--block-bgc2);">
+        <div>
+          <i class="fas fa-users"></i>
+          <p class="m-0">人員管理</p>
+        </div>
+      </a>
+      <a href="manage/team" class="block mb-3 link-box" style="background-color: var(--block-bgc1);">
+        <div>
+          <i class="fas fa-flag"></i>
+          <p class="m-0">隊伍管理</p>
+        </div>
+      </a>
+      <a class="block mb-3 link-box" style="background-color: var(--block-bgc3);"></a>
+      <a class="block mb-3 link-box" style="background-color: var(--block-bgc4);"></a>
+      <a class="block mb-3 link-box" style="background-color: var(--block-bgc5);"></a>
+      <a class="block mb-3 link-box" style="background-color: var(--block-bgc6);"></a>
+    </div>
+    <div>
+      <div class="container">
+        <h3 class="fw-bold">佔位文字</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/axios.min.js"></script>
+  <script src="/js/vue.js"></script>
+</body>
+
+</html>
