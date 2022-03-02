@@ -1,3 +1,21 @@
+Vue.component('vue-information', {
+  template: '#info',
+  data() {
+    return {
+      isOpen: false,
+      info: {},
+    };
+  },
+  methods: {
+    close() {
+      this.isOpen = false;
+    },
+    open() {
+      this.isOpen = true;
+    },
+  },
+});
+
 new Vue({
   el: '#app',
   data() {
@@ -8,7 +26,8 @@ new Vue({
       },
       teamList: [],
       id: '',
-      step: 'list',
+      step: localStorage.getItem('step') || 'list',
+      select: localStorage.getItem('select') || 'name',
     };
   },
   mounted() {
@@ -24,6 +43,9 @@ new Vue({
   computed: {
     title() {
       return this.titleList[this.step].title;
+    },
+    selectList() {
+      return this.teamList.map((team) => team[this.select]);
     },
   },
   methods: {
@@ -74,6 +96,19 @@ new Vue({
             return;
           }
         });
+    },
+    infoOpen(index) {
+      const modal = this.$refs.modal;
+      modal.info = this.teamList[index];
+      modal.isOpen = true;
+    },
+  },
+  watch: {
+    select() {
+      localStorage.setItem('select', this.select);
+    },
+    step() {
+      localStorage.setItem('step', this.step);
     },
   },
 });

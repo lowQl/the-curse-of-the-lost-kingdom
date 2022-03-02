@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-transform: 200ms;
+          transform: 200ms;
+}
+
+[v-cloak] {
+  display: none;
+}
+
 .footer {
   height: 48px;
 }
@@ -6,10 +17,18 @@
   height: 100%;
 }
 
+tr .t-center {
+  text-align: center;
+}
+
 .pivot-bar-item-tab {
   -webkit-transition: color .3s;
   transition: color .3s;
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   color: #333;
   height: 100%;
   text-decoration: none;

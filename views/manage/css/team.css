@@ -18,4 +18,85 @@ input[type=text] {
   color: #000;
   background: none;
 }
+
+.info-background:not(.active) {
+  display: none;
+}
+
+.info-background {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  background-color: #0000007f;
+  padding: 30px 15px 30px 15px;
+}
+
+.info-background .info-main {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #fff;
+  width: inherit;
+  height: inherit;
+}
+
+.info-background .info-main .info-header,
+.info-background .info-main .info-footer {
+  width: inherit;
+  background-color: #ebebeb;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.726);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.726);
+  padding: 10px;
+  height: 52px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.info-background .info-main .info-header .info-title,
+.info-background .info-main .info-footer .info-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.info-background .info-main .info-header .info-close,
+.info-background .info-main .info-footer .info-close {
+  width: 32px;
+  height: 32px;
+  background-color: unset;
+  border: 0;
+}
+
+.info-background .info-main .info-body {
+  padding: 10px;
+}
+
+.info-background .info-main .info-body ul {
+  margin: 0;
+  padding: 0;
+}
+
+.info-background .info-main .info-body ul li {
+  list-style: none;
+}
+
+.info-background .info-main .info-footer {
+  position: absolute;
+  -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.726);
+          box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.726);
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  bottom: 0;
+  gap: 12px;
+}
 /*# sourceMappingURL=team.css.map */

@@ -1,7 +1,7 @@
 const mysqli = require('mysql2');
 
 const db = mysqli.createConnection({
-  host: '140.125.207.21',
+  host: '127.0.0.1',
   user: 'root',
   password: '1234',
   database: 'tcotlk',

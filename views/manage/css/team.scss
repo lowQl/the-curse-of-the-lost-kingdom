@@ -20,3 +20,72 @@ input[type=text] {
     background: none;
   }
 }
+
+.info-background:not(.active) {
+  display: none;
+}
+
+.info-background {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  background-color: #0000007f;
+  padding: 30px 15px 30px 15px;
+
+  .info-main {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+    width: inherit;
+    height: inherit;
+
+    .info-header,
+    .info-footer {
+      width: inherit;
+      background-color: #ebebeb;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.726);
+      padding: 10px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .info-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .info-close {
+        width: 32px;
+        height: 32px;
+        background-color: unset;
+        border: 0;
+      }
+    }
+
+    .info-body {
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          list-style: none;
+        }
+      }
+
+      padding: 10px;
+    }
+
+    .info-footer {
+      position: absolute;
+      box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.726);
+      justify-content: flex-end;
+      bottom: 0;
+      gap: 12px;
+    }
+  }
+}

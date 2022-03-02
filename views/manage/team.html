@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="app" class="h-100">
+  <div id="app" class="h-100" v-cloak>
     <nav class="navbar navbar-light fixed-top border-bottom shadow-sm" style="background-color: #e3f2fd;">
       <div class="container">
         <a class="navbar-brand" href="/" style="font-size: .8rem;">LOGO 遺落國度·金資塔的詛咒</a>
@@ -33,26 +33,31 @@
               <table class="table table-light">
                 <thead>
                   <tr>
-                    <th scope="col">資訊</th>
+                    <th scope="col" class="t-center">資訊</th>
                     <th scope="col">編號</th>
-                    <th scope="col">名稱</th>
-                    <th scope="col">刪除</th>
+                    <th scope="col" class="t-center">
+                      <!-- 刪除 -->
+                      <select class="form-select border-0" v-model="select">
+                        <option value="name">名稱</option>
+                        <option value="money">金幣</option>
+                      </select>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="team,index of teamList">
                     <th class="t-center">
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" @click="infoOpen(index)">
                         <i class="fas fa-info-circle"></i>
                       </button>
                     </th>
                     <th scope="row">{{ team.id }}</th>
-                    <td>{{ team.name }}</td>
-                    <td class="t-center">
+                    <th scope="row">{{ selectList[index] }}</th>
+                    <!-- <td class="t-center">
                       <button type="button" class="btn btn-danger" @click="deleteHandler(index)">
                         <i class="fas fa-trash-alt"></i>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -73,6 +78,8 @@
       </div>
     </div>
 
+    <vue-information ref="modal"></vue-information>
+
     <footer class="text-center text-lg-start bg-light text-muted fixed-bottom footer">
       <div class="text-center foot-box d-flex justify-content-around align-items-center"
         style="background-color: rgba(0, 0, 0, 0.05);">
@@ -92,6 +99,29 @@
       </div>
     </footer>
   </div>
+
+  <template id="info">
+    <div class="info-background" :class="{active:isOpen}" @click.self="isOpen = false">
+      <div class="info-main">
+        <div class="info-header">
+          <h3 class="info-title">{{ info.id }}</h3>
+          <button class="info-close" @click="close"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="info-body">
+          <ul>
+            <li>名稱：{{ info.name }}</li>
+            <li>金錢：{{ info.money }}</li>
+          </ul>
+        </div>
+
+        <!-- <div class="info-footer">
+          <h3 class="info-title">title</h3>
+          <button class="info-close"><i class="fas fa-times"></i></button>
+        </div> -->
+      </div>
+    </div>
+  </template>
 
   <script src="/js/axios.min.js"></script>
   <script src="/js/vue.js"></script>
