@@ -1,7 +1,7 @@
 const express = require('express');
 const dateFormat = require('../module/dateFormat');
 const path = require('path');
-const {dirname} = require('path');
+const { dirname } = require('path');
 const db = require(path.join(dirname(require.main.filename), 'connect'));
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.all('*', (req, res, next) => {
     if (req.method === 'GET') {
       return res.redirect(307, '/');
     } else {
-      return res.status(404).json({redirect: '/'});
+      return res.status(404).json({ redirect: '/' });
     }
   }
   next();
@@ -36,8 +36,8 @@ router.get('/user', (req, res) => {
  * 取得所有管理人員
  */
 router.get('/users', (req, res) => {
-  db.query('SELECT * FROM manager', (err, results) => {
-    res.status(200).json(results);
+  db.query('SELECT * FROM manager').then(([rows, fields]) => {
+    res.status(200).json(rows);
   });
 });
 
@@ -45,16 +45,15 @@ router.get('/users', (req, res) => {
  * 新增管理人員
  */
 router.post('/user', (req, res) => {
-  const {id, role} = req.body;
-  return db.query('INSERT INTO manager (id,role) VALUES (?, ?)',
-    [id.toUpperCase(), role], (err, results) => {
-      if (err) {
-        const errMsg = {
-          '1062': '學號重複',
-        };
-        return res.status(400).end(errMsg[err.errno] || '新增失敗');
-      }
+  const { id, role } = req.body;
+  return db.query('INSERT INTO manager (id,role) VALUES (?, ?)', [id.toUpperCase(), role])
+    .then(([rows, fields]) => {
       return res.status(200).end('success');
+    }).catch((err) => {
+      const errMsg = {
+        '1062': '學號重複',
+      };
+      return res.status(400).end(errMsg[err.errno] || '新增失敗');
     });
 });
 
@@ -62,15 +61,12 @@ router.post('/user', (req, res) => {
  * 刪除管理人員
  */
 router.delete('/user/:id', (req, res) => {
-  const {id} = req.params;
-  db.query('DELETE FROM manager WHERE id = ?',
-    [id], (err, results) => {
-      if (err) {
-        return res.status(400).end('刪除失敗');
-      }
+  const { id } = req.params;
+  db.query('DELETE FROM manager WHERE id = ?', [id])
+    .then(([rows, fields]) => {
       if (id === req.session.user.id) { // 刪除自己
         req.session.destroy();
-        res.status(404).json({redirect: '/'});
+        res.status(404).json({ redirect: '/' });
       }
       return res.status(200).end('success');
     });
@@ -89,9 +85,9 @@ router.get('/team', (req, res) => {
  * 取得所有隊伍
  */
 router.get('/teams', (req, res) => {
-  return db.query('SELECT * FROM team ORDER BY upload_date ASC',
-    (err, results) => {
-      return res.status(200).json(results);
+  return db.query('SELECT * FROM team ORDER BY upload_date ASC')
+    .then(([rows, fields]) => {
+      return res.status(200).json(rows);
     });
 });
 
@@ -100,31 +96,29 @@ router.get('/teams', (req, res) => {
  * 新增隊伍
  */
 router.post('/team', (req, res) => {
-  const {id} = req.body;
-  return db.query('INSERT INTO team (id, upload_date) VALUES (?, ?)',
-    [id, dateFormat(new Date())], (err, results) => {
-      if (err) {
-        const errMsg = {
-          '1062': '隊伍編號重複',
-        };
-        return res.status(400).end(errMsg[err.errno] || '新增失敗');
-      }
-      return res.status(200).end('success');
-    });
+  const { id } = req.body;
+  db.query('INSERT INTO team (id, upload_date) VALUES (?, ?)',
+    [id, dateFormat(new Date())]).then(([rows, fields]) => {
+    return res.status(200).end('success');
+  }).catch((err) => {
+    const errMsg = {
+      '1062': '隊伍編號重複',
+    };
+    return res.status(400).end(errMsg[err.errno] || '新增失敗');
+  });
 });
 
 /**
  * 刪除隊伍
  */
 router.delete('/team/:id', (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   db.query('DELETE FROM team WHERE id = ?',
-    [id], (err, results) => {
-      if (err) {
-        return res.status(400).end('刪除失敗');
-      }
-      return res.status(200).end('success');
-    });
+    [id]).then(([rows, fields]) => {
+    return res.status(200).end('success');
+  }).catch((err) => {
+    return res.status(400).end('刪除失敗');
+  });
 });
 
 module.exports = router;

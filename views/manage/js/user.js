@@ -3,8 +3,8 @@ new Vue({
   data() {
     return {
       titleList: {
-        insert: {title: '新增管理人員'},
-        list: {title: '管理人員列表'},
+        insert: { title: '新增管理人員' },
+        list: { title: '管理人員列表' },
       },
       userList: [],
       role: '',
@@ -34,7 +34,7 @@ new Vue({
     },
     insertHandler() {
       if (this.id === '' || this.role === '') return;
-      const user = {id: this.id, role: this.role};
+      const user = { id: this.id, role: this.role };
       axios.post('./user', user)
         .then((res) => {
           const msg = res.data;
@@ -47,10 +47,11 @@ new Vue({
           if (!res) {
             alert('unKnow error.');
             return;
-          }
-          if (res.status === 404) {
+          } else if (res.status === 404) {
             this.redirect(res.redirect || '/');
             return;
+          } else {
+            alert(res.data);
           }
         });
     },

@@ -1,25 +1,31 @@
 const express = require('express');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const app = express();
 const port = process.env.PORT || 80;
 
 const indexRouter = require('./routes/index');
 const manageRouter = require('./routes/manage');
+const db = require('./connect');
+const sessionStore = new MySQLStore({}, db);
 
 app.use('/index', express.static('views/index'));
 app.use('/manage', express.static('views/manage'));
 app.use('/', express.static('views/public'));
+
 
 app.use(
   express.urlencoded({
     extended: true,
   }),
 );
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  cookie: {secure: false},
+  cookie: { secure: false },
+  store: sessionStore, // assigning sessionStore to the session
 }));
 app.use(express.json());
 app.use('/', indexRouter);
