@@ -1,14 +1,12 @@
 const express = require('express');
-const dateFormat = require('../module/dateFormat');
+const moment = require('moment');
 const path = require('path');
 const { dirname } = require('path');
 const db = require(path.join(dirname(require.main.filename), 'connect'));
 
 const router = express.Router();
-const options = {
-  root: path.join(__dirname, '../views/manage'),
-};
-
+const options = { root: path.join(__dirname, '../views/manage') };
+const dateTime = 'YYYY-MM-DD HH:mm:ss';
 /**
  * 登入檢查
  */
@@ -85,12 +83,11 @@ router.get('/team', (req, res) => {
  * 取得所有隊伍
  */
 router.get('/teams', (req, res) => {
-  return db.query('SELECT * FROM team ORDER BY upload_date ASC')
+  db.query('SELECT * FROM team ORDER BY upload_date ASC')
     .then(([rows, fields]) => {
       return res.status(200).json(rows);
     });
 });
-
 
 /**
  * 新增隊伍
@@ -98,7 +95,7 @@ router.get('/teams', (req, res) => {
 router.post('/team', (req, res) => {
   const { id } = req.body;
   db.query('INSERT INTO team (id, upload_date) VALUES (?, ?)',
-    [id, dateFormat(new Date())]).then(([rows, fields]) => {
+    [id, moment().format(dateTime)]).then(([rows, fields]) => {
     return res.status(200).end('success');
   }).catch((err) => {
     const errMsg = {
@@ -119,6 +116,22 @@ router.delete('/team/:id', (req, res) => {
   }).catch((err) => {
     return res.status(400).end('刪除失敗');
   });
+});
+
+// ------------------寶物------------------
+
+/**
+ * 取得寶物頁面
+ */
+router.get('/treasure', (req, res) => {
+  res.sendFile('treasure.html', options);
+});
+
+/**
+ * 取得所有寶物
+ */
+router.get('/treasures', (req, res) => {
+  res.sendFile('treasure.html', options);
 });
 
 module.exports = router;

@@ -21,8 +21,8 @@ new Vue({
   data() {
     return {
       titleList: {
-        insert: {title: '新增隊伍'},
-        list: {title: '隊伍列表'},
+        insert: { title: '新增隊伍' },
+        list: { title: '隊伍列表' },
       },
       teamList: [],
       id: '',
@@ -54,7 +54,7 @@ new Vue({
     },
     insertHandler() {
       if (this.id === '' || this.role === '') return;
-      const team = {id: this.id, role: this.role};
+      const team = { id: this.id, role: this.role };
       axios.post('./team', team)
         .then((res) => {
           const msg = res.data;

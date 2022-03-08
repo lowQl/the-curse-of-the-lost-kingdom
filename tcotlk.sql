@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `manager` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理者\r\n';
 
--- 正在傾印表格  tcotlk.manager 的資料：~5 rows (近似值)
+-- 正在傾印表格  tcotlk.manager 的資料：~6 rows (近似值)
 /*!40000 ALTER TABLE `manager` DISABLE KEYS */;
 REPLACE INTO `manager` (`id`, `role`) VALUES
 	('B109', '123'),
@@ -42,8 +42,16 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在傾印表格  tcotlk.sessions 的資料：~0 rows (近似值)
+-- 正在傾印表格  tcotlk.sessions 的資料：~7 rows (近似值)
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+REPLACE INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+	('1Q-DA-Y8ASGdgJ_EbDBLKK8WVk6aOm4Y', 1646699007, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B110","role":"測試人員"}}'),
+	('2ISLbi-vOvRS4XHp2d2D2PEUBVNTNCu_', 1646833482, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B110","role":"測試人員"}}'),
+	('FUo0RYRQRLkv9FOa8t2F68ovNegSk3uW', 1646728406, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"}}'),
+	('HPIinxkzH_sqZhI8lThgb8Y0_LW1_e42', 1646728818, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B110","role":"測試人員"}}'),
+	('lsDYD47Hi_NEFVDFc4tWkczEOTDQdN52', 1646728287, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B110","role":"測試人員"}}'),
+	('wobJJcXulkaznddNwPU-V10E01muDXzK', 1646729141, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B110","role":"測試人員"}}'),
+	('xNlL73ISN40Nzd0G7bgOHd9OwhWlU8PF', 1646728498, '{"cookie":{"originalMaxAge":null,"expires":null,"secure":false,"httpOnly":true,"path":"/"},"user":{"rank":"manager","id":"B11017002","role":"Coder"}}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 
 -- 傾印  資料表 tcotlk.team 結構
@@ -62,6 +70,21 @@ REPLACE INTO `team` (`id`, `name`, `money`, `upload_date`) VALUES
 	('team02', NULL, 0, '2022-02-27 09:15:50'),
 	('team034', NULL, 0, '2022-02-27 09:15:52');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
+
+-- 傾印  資料表 tcotlk.treasure 結構
+CREATE TABLE IF NOT EXISTS `treasure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL COMMENT '名稱',
+  `content` longtext DEFAULT '' COMMENT '介紹',
+  `type` varchar(2) NOT NULL COMMENT '種類\r\n主線\r\n支線\r\n',
+  `upload_time` datetime DEFAULT NULL COMMENT '上傳時間',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='寶物';
+
+-- 正在傾印表格  tcotlk.treasure 的資料：~0 rows (近似值)
+/*!40000 ALTER TABLE `treasure` DISABLE KEYS */;
+/*!40000 ALTER TABLE `treasure` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
