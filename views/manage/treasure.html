@@ -33,15 +33,21 @@
               <table class="table table-light">
                 <thead>
                   <tr>
-                    <th scope="col">學號</th>
-                    <th scope="col">職位</th>
-                    <th scope="col t-center">刪除</th>
+                    <th scope="col" class="t-center">資訊</th>
+                    <th scope="col">名稱</th>
+                    <th scope="col">種類</th>
+                    <th scope="col" class="t-center">刪除</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="user,index of userList" draggable="true">
-                    <th scope="row">{{ user.id }}</th>
-                    <td>{{ user.role }}</td>
+                  <tr v-for="treasure,index of treasureList" draggable="true">
+                    <th class="t-center">
+                      <button type="button" class="btn btn-primary" @click="infoOpen(index)">
+                        <i class="fas fa-info-circle"></i>
+                      </button>
+                    </th>
+                    <th scope="row">{{ treasure.name }}</th>
+                    <td>{{ treasure.type }}</td>
                     <td class="t-center">
                       <button type="button" class="btn btn-danger" @click="deleteHandler(index)">
                         <i class="fas fa-trash-alt"></i>

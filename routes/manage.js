@@ -7,6 +7,7 @@ const db = require(path.join(dirname(require.main.filename), 'connect'));
 const router = express.Router();
 const options = { root: path.join(__dirname, '../views/manage') };
 const dateTime = 'YYYY-MM-DD HH:mm:ss';
+
 /**
  * 登入檢查
  */
@@ -44,7 +45,7 @@ router.get('/users', (req, res) => {
  */
 router.post('/user', (req, res) => {
   const { id, role } = req.body;
-  return db.query('INSERT INTO manager (id,role) VALUES (?, ?)', [id.toUpperCase(), role])
+  db.query('INSERT INTO manager (id,role) VALUES (?, ?)', [id.toUpperCase(), role])
     .then(([rows, fields]) => {
       return res.status(200).end('success');
     }).catch((err) => {
@@ -131,7 +132,26 @@ router.get('/treasure', (req, res) => {
  * 取得所有寶物
  */
 router.get('/treasures', (req, res) => {
-  res.sendFile('treasure.html', options);
+  db.query('SELECT * FROM treasure ORDER BY upload_date ASC')
+    .then(([rows, fields]) => {
+      return res.status(200).json(rows);
+    });
+});
+
+/**
+ * 新增寶物
+ */
+router.post('/treasure', (req, res) => {
+  const { name, content, type } = req.body;
+  db.query('INSERT INTO treasure (name, content, type, upload_date) VALUES (?, ?, ?, ?)',
+    [name, content, type, moment().format(dateTime)]).then(([rows, fields]) => {
+    return res.status(200).end('success');
+  }).catch((err) => {
+    const errMsg = {
+      '1062': '寶物名稱重複',
+    };
+    return res.status(400).end(errMsg[err.errno] || '新增失敗');
+  });
 });
 
 module.exports = router;
